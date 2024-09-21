@@ -39,7 +39,6 @@ class Comment(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name = "user_comments")
     content = models.TextField()
     parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='replies')
-    created_at = models.DateTimeField(auto_now_add=True)
     approved = models.BooleanField(default=True)
 
     def __str__(self):
