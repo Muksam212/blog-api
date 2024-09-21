@@ -24,7 +24,7 @@ class Post(BaseModel):
     slug = models.SlugField(unique = True)
     content = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name = "posts")
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name = "category_post")
     tags = models.ManyToManyField(Tag, blank=True)
     published_at = models.DateTimeField(null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True)
