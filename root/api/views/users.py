@@ -66,7 +66,7 @@ class UserListView(APIView):
             return Response(filterset.errors, status=400)
 
     
-class UserLoginView(APIView):
+class UserLoginView(CreateAPIView):
     serializer_class = UserLoginSerializer
     renderer_classes = [UserRenderers]
 

@@ -116,10 +116,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # JWT Rest Framework Configuration
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
-        "rest_framework.authentication.SessionAuthentication",
-    )
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
 }
 
 
@@ -164,4 +163,16 @@ SIMPLE_JWT = {
     "TOKEN_TYPE_CLAIM": "token_type",
     "TOKEN_USER_CLASS": "rest_framework_simplejwt.models.TokenUser",
     "JTI_CLAIM": "jti",
+}
+
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    },
+    'USE_SESSION_AUTH': False,
 }
