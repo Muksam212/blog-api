@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from users.models import User
 
+from ..serializers.post import PostSerializer
+
 class UserRegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only = True, required = True)
     confirm_password = serializers.CharField(write_only = True, required = True)
@@ -40,9 +42,10 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 
 
 class UserListSerializer(serializers.ModelSerializer):
+    posts = PostSerializer(many = True)
     class Meta:
         model = User
-        fields = ("id","username", "email", "role", "bio")
+        fields = ("id","username", "email", "role", "bio", "posts",)
 
 class UserLoginSerializer(serializers.ModelSerializer):
     username = serializers.CharField()
