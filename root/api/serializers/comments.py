@@ -9,6 +9,5 @@ class CommentSerializer(serializers.ModelSerializer):
             "post",
             "user",
             "content",
-            "parent",
             "approved"
         )

@@ -38,7 +38,6 @@ class Comment(BaseModel):
     post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name = "user_comments")
     content = models.TextField()
-    parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='replies')
     approved = models.BooleanField(default=True)
 
     def __str__(self):
