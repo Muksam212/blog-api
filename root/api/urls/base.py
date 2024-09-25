@@ -9,6 +9,8 @@ from .category import urlpatterns as category_urlpatterns
 from .tag import urlpatterns as tag_urlpatterns
 from .post import urlpatterns as post_urlpatterns
 from .comments import urlpatterns as comments_urlpatterns
+from .reaction import urlpatterns as reaction_urlpatterns
+from .notification import urlpatterns as notification_urlpatterns
 
 from django.urls import path, include
 
@@ -42,4 +44,6 @@ urlpatterns = (
     +tag_urlpatterns
     +comments_urlpatterns
     +post_urlpatterns
+    +reaction_urlpatterns
+    +notification_urlpatterns
 )

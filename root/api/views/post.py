@@ -16,7 +16,6 @@ class PostListAPIView(ListAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = PostSerializer
     model = Post
-    queryset = Post.objects.all()
 
     def get_queryset(self):
         return self.model.objects.filter(author = self.request.user)

@@ -49,12 +49,13 @@ class Reaction(BaseModel):
         ('like', 'Like'),
         ('dislike', 'Dislike'),
         ('love', 'Love'),
+        ('None', 'None')
         # Add more reactions as needed
     ]
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_reaction")
     post = models.ForeignKey(Post, related_name='reactions', on_delete=models.CASCADE, null=True, blank=True)
     comment = models.ForeignKey(Comment, related_name='reactions', on_delete=models.CASCADE, null=True, blank=True)
-    reaction = models.CharField(max_length=10, choices=REACTION_CHOICES)
+    reaction = models.CharField(max_length=10, choices=REACTION_CHOICES, default = 'None')
 
     class Meta:
         unique_together = ('user', 'post', 'comment')

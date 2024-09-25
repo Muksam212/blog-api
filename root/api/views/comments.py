@@ -27,5 +27,5 @@ class CommentAPIView(APIView):
     def get(self, request):
         user = request.user
         comment = Comment.objects.all().filter(user = user)
-        serializer = CommentSerializer(comment, many = True)
+        serializer = CommentSerializer(comment, many = False)
         return Response(serializer.data)
