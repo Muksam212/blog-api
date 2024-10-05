@@ -7,10 +7,9 @@ class UserRegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only = True, required = True)
     confirm_password = serializers.CharField(write_only = True, required = True)
     role = serializers.CharField(max_length=20, required = True)
-    bio = serializers.CharField(max_length=20, required = True)
     class Meta:
         model = User
-        fields = ['username', 'email', 'password', 'confirm_password', 'bio', 'profile_image', 'role']
+        fields = ['username', 'email', 'password', 'confirm_password', 'profile_image', 'role']
 
 
     def validate(self, attrs):

@@ -5,14 +5,15 @@ from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView
 from .filters import *
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.permissions import IsAuthenticated
+from .permission import IsAdminMixinOrAuthorOrReaderMixin
 
-class CategoryCreateAPIView(CreateAPIView):
+class CategoryCreateAPIView(IsAdminMixinOrAuthorOrReaderMixin,CreateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = CategorySerializer
     model = Category
 
 
-class CategoryListAPIView(ListAPIView):
+class CategoryListAPIView(IsAdminMixinOrAuthorOrReaderMixin,ListAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = CategorySerializer
     filter_backends = [DjangoFilterBackend]
@@ -20,9 +21,9 @@ class CategoryListAPIView(ListAPIView):
     queryset = Category.objects.all()
 
 
-class CategoryUpdateAPIView(UpdateAPIView):
+class CategoryUpdateAPIView(IsAdminMixinOrAuthorOrReaderMixin,UpdateAPIView):
     permission_classes = [IsAuthenticated]
+    queryset = Category.objects.all()
     serializer_class = CategorySerializer
     model = Category
     lookup_field = "id"
-    queryset = Category.objects.all()

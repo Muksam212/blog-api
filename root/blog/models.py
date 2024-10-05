@@ -11,21 +11,12 @@ class Category(BaseModel):
     def __str__(self):
         return f"{self.name}"
 
-class Tag(BaseModel):
-    name = models.CharField(max_length=100, unique = True)
-    slug = models.SlugField(unique = True)
-
-    def __str__(self):
-        return f"{self.name}"
-
-
 class Post(BaseModel):
     title = models.CharField(max_length=255)
     slug = models.SlugField(unique = True)
     content = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name = "posts")
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name = "category_post")
-    tags = models.ManyToManyField(Tag, blank=True)
     published_at = models.DateTimeField(null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=[('draft', 'Draft'), ('published', 'Published')])

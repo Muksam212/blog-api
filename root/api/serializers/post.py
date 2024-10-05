@@ -5,6 +5,7 @@ from ..serializers.comments import CommentSerializer
 
 class PostSerializer(serializers.ModelSerializer):
     # comments = CommentSerializer(many = True)
+    id = serializers.IntegerField(read_only = True)
     class Meta:
         model = Post
         fields = (
@@ -14,8 +15,6 @@ class PostSerializer(serializers.ModelSerializer):
             "content",
             "author",
             "category",
-            "tags",
             "status",
-            "views",
+            "views"
         )
-        depth = 1

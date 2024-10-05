@@ -24,6 +24,9 @@ from .filters import(
 
 from django_filters.rest_framework import DjangoFilterBackend
 
+from .permission import IsAdminMixinOrAuthorOrReaderMixin
+from django.contrib.auth.models import Group
+
 def get_tokens_for_user(user):
     refresh = RefreshToken.for_user(user)
 
@@ -33,13 +36,19 @@ def get_tokens_for_user(user):
     }
 
 
-class UserRegisterView(CreateAPIView):
+class UserRegisterView(IsAdminMixinOrAuthorOrReaderMixin,CreateAPIView):
+    permission_classes = [IsAuthenticated]
     serializer_class = UserRegisterSerializer
     def post(self, request, format = None):
         serializer = self.serializer_class(data = request.data)
         if serializer.is_valid(raise_exception=True):
             user = serializer.save()
             user_data = self.serializer_class(user).data
+
+            #assign the user as a role
+            role = user.role
+            group, created = Group.objects.get_or_create(name = role)
+            user.groups.add(group)
 
             return Response(
                 {"user": user_data, "msg": "Registration Success"},

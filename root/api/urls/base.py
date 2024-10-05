@@ -6,7 +6,6 @@ from rest_framework import permissions
 
 from .users import urlpatterns as users_urlpatterns
 from .category import urlpatterns as category_urlpatterns
-from .tag import urlpatterns as tag_urlpatterns
 from .post import urlpatterns as post_urlpatterns
 from .comments import urlpatterns as comments_urlpatterns
 from .reaction import urlpatterns as reaction_urlpatterns
@@ -41,7 +40,6 @@ urlpatterns = (
     ]
     +users_urlpatterns
     +category_urlpatterns
-    +tag_urlpatterns
     +comments_urlpatterns
     +post_urlpatterns
     +reaction_urlpatterns

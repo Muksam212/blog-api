@@ -8,9 +8,9 @@ from .managers import CustomUserManager
 class User(BaseModel,AbstractUser):
     username = models.CharField(max_length=100, unique = True)
     email = models.EmailField(unique=True)
-    bio = models.TextField(blank=True)
+    bio = models.TextField(blank=True, null = True)
     profile_image = models.ImageField(upload_to='profile_images/', blank=True)
-    role = models.CharField(max_length=20, choices=[('admin', 'Admin'), ('author', 'Author'), ('reader', 'Reader')])
+    role = models.CharField(max_length=20, choices=[('Admin', 'Admin'), ('Author', 'Author'), ('Reader', 'Reader')])
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = ["email"]
 
